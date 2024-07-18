@@ -1,5 +1,6 @@
 import { ArrowButton } from 'components/arrow-button';
 import { Button } from 'components/button';
+import { Text } from '../text';
 
 import styles from './ArticleParamsForm.module.scss';
 import { FormEvent, useEffect, useRef, useState } from 'react';
@@ -14,6 +15,7 @@ import {
 	backgroundColors,
 	contentWidthArr,
 	OptionType,
+	defaultArticleState,
 } from 'src/constants/articleProps';
 
 export const ArticleParamsForm = ({
@@ -22,11 +24,11 @@ export const ArticleParamsForm = ({
 	setFormStates: (data: Record<string, OptionType>) => void;
 }) => {
 	const defaultValues = {
-		selectFont: fontFamilyOptions[0],
-		selectFontSize: fontSizeOptions[0],
-		selectFontColor: fontColors[0],
-		selectBackgroundColor: backgroundColors[0],
-		selectContentWidth: contentWidthArr[0],
+		selectFont: defaultArticleState.fontFamilyOption,
+		selectFontSize: defaultArticleState.fontSizeOption,
+		selectFontColor: defaultArticleState.fontColor,
+		selectBackgroundColor: defaultArticleState.backgroundColor,
+		selectContentWidth: defaultArticleState.contentWidth,
 	};
 
 	const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -74,6 +76,9 @@ export const ArticleParamsForm = ({
 					className={styles.form}
 					onSubmit={handleSubmit}
 					onReset={handleReset}>
+					<Text uppercase={true} weight={800} size={31}>
+						Задайте параметры
+					</Text>
 					<Select
 						selected={dataForm.selectFont}
 						onChange={(selected) =>
